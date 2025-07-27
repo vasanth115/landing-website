@@ -5,8 +5,9 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Install dependencies (optimize Docker layer caching)
-COPY package.json package-lock.json ./
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install
+
 
 # Copy the rest of the application
 COPY . .
